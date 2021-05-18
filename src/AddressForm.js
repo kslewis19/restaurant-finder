@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 function AddressForm(props){
 
-    const [address, setAddress]= useState(null)
+    const [address, setAddress]= useState("")
 
     const handleSubmit = (event)=>{
         event.preventDefault()
