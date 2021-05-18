@@ -1,6 +1,7 @@
 import Button from '@material-ui/core/Button';
 import { TextField, FormLabel } from '@material-ui/core';
 import { useEffect, useState } from 'react';
+import './App.css';
 
 function AddressForm(props){
 
@@ -18,7 +19,7 @@ function AddressForm(props){
     
 
     return(
-        <div>
+        <div class= "Address">
             <h2> Please enter your adress bellow to search for restaurants near you</h2>
             <form method="post" onSubmit={handleSubmit}>
             <TextField name='value' value={address} onChange={(event)=>{setAddress(event.target.value)}} placeholder={'enter address'} >

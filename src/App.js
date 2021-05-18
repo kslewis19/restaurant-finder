@@ -11,9 +11,10 @@ function App() {
   
   return (
     <div >
-      
+      <div style={{flexDirection: "row",textAlign:"center"}}>
     
-    <h3>Restaurant Finder</h3>
+    <h1 >Restaurant Finder</h1>
+    </div>
     {hasAdd? <RestaurantViewer coords={coords} />:<AddressForm setHasAdd= {setHasAdd} setCoords={setCoords} />}
     </div>
   );
