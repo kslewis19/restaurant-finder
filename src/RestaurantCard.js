@@ -26,7 +26,7 @@ function RestaurantCard(props){
         <div>
         <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src={props.image} />
+          <Avatar alt="Remy Sharp" variant="square" className={classes.square} src={props.image} />
         </ListItemAvatar>
         <ListItemText
           primary= {props.name}
