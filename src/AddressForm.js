@@ -3,6 +3,8 @@ import { TextField, FormLabel } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import './App.css';
 
+const API_KEY= process.env.REACT_APP_API_KEY
+
 function AddressForm(props){
 
     const [address, setAddress]= useState("")
@@ -14,13 +16,28 @@ function AddressForm(props){
         
     }
     const fetchCoords=()=>{
-        props.setHasAdd(true)
+        const url = new URL("https://maps.googleapis.com/maps/api/geocode/json?");
+        url.searchParams.append("key", API_KEY);
+        url.searchParams.append("address", address);
+        
+
+        const axios = require('axios');
+        axios.get(url)
+        .then(response => {
+          const formated= response.data.results[0].geometry.location.lat+","+ response.data.results[0].geometry.location.lng
+          console.log(formated)
+          props.setCoords(formated)
+          props.setHasAdd(true)
+        }, error => {
+          console.log(error);
+        });
+        
     }
     
 
     return(
-        <div class= "Address">
-            <h2> Please enter your adress bellow to search for restaurants near you</h2>
+        <div className= "Address">
+            <h2> Please enter your address bellow to search for restaurants near you</h2>
             <form method="post" onSubmit={handleSubmit}>
             <TextField name='value' value={address} onChange={(event)=>{setAddress(event.target.value)}} placeholder={'enter address'} >
             </TextField>

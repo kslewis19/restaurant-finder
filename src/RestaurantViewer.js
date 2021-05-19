@@ -28,7 +28,8 @@ const API_KEY= process.env.REACT_APP_API_KEY
 function RestaurantViewer(props){
     const classes = useStyles();
     const [restaurants, setRestaurants]= useState([])
-    const [radius,setRadius]= useState(1000)
+    const [filterd, setFiltered]= useState([])
+    const [radius,setRadius]= useState(5000)
    
     useEffect(()=>{
         
@@ -45,18 +46,27 @@ function RestaurantViewer(props){
           const axios = require('axios');
           axios.get(url)
           .then(response => {
-            console.log(response.data.results);
-            setRestaurants(response.data.results)
+            //console.log(response.data.results);
+            
+            filterList(response.data.results)
           }, error => {
             console.log(error);
           });
+    }
+    const filterList= (data)=>{
+        console.log("res",data)
+        const newRest = data.filter(rest=>rest.opening_hours.open_now==true);
+
+        console.log("filt",newRest)
+        //setFiltered(newRest)
+        setRestaurants(newRest)
     }
 
 
     
     return(
-        <div >
-             <div style ={{flex:1}}>
+        <div style ={{display: "flex",flexDirection:"row"}} >
+             <div style ={{display: "flex",flex:1, width: "50%", justifyContent:"center"}}>
              <List className={classes.root}>
             
             {restaurants.map((rest,key)=>(
@@ -68,6 +78,9 @@ function RestaurantViewer(props){
             
             </List>
             </div>
+            <div style ={{display: "flex",flex:1, width: "50%"}}>
+                the map go here
+                </div>
             
         </div>
     )
