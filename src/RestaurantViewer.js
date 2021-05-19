@@ -28,8 +28,7 @@ const API_KEY= process.env.REACT_APP_API_KEY
 function RestaurantViewer(props){
     const classes = useStyles();
     const [restaurants, setRestaurants]= useState([])
-    const [filterd, setFiltered]= useState([])
-    const [radius,setRadius]= useState(5000)
+    const [radius,setRadius]= useState(10000)
    
     useEffect(()=>{
         
@@ -42,27 +41,25 @@ function RestaurantViewer(props){
           url.searchParams.append("location", props.coords);
           url.searchParams.append("radius", radius );
           url.searchParams.append("type", "restaurant" );
+          url.searchParams.append("opennow", true );
 
           const axios = require('axios');
           axios.get(url)
           .then(response => {
             //console.log(response.data.results);
             
-            filterList(response.data.results)
+            setRestaurants(response.data.results)
           }, error => {
             console.log(error);
           });
     }
-    const filterList= (data)=>{
-        console.log("res",data)
-        const newRest = data.filter(rest=>rest.opening_hours.open_now==true);
 
-        console.log("filt",newRest)
-        //setFiltered(newRest)
+    const sortList= ()=>{
+        const newRest = [...restaurants]
+        newRest.sort(function(a, b){return a.price_level - b.price_level})
+        console.log(newRest)
         setRestaurants(newRest)
     }
-
-
     
     return(
         <div style ={{display: "flex",flexDirection:"row"}} >
@@ -71,7 +68,7 @@ function RestaurantViewer(props){
             
             {restaurants.map((rest,key)=>(
 
-                rest.opening_hours.open_now==true?<RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key}/>: null 
+                <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key}/>
                 
                 
             ))}
