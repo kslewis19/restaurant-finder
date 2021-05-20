@@ -144,7 +144,7 @@ function RestaurantViewer(props){
         color="default"
         className={classes.button}
         onClick={sortListPriceDown}
-        startIcon={<FiArrowDown />}
+        startIcon={<FiArrowDown/>}
       >
         $ &nbsp;&nbsp;
       </Button>
