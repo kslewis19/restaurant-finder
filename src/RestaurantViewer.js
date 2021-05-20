@@ -36,6 +36,7 @@ function RestaurantViewer(props){
     const classes = useStyles();
     const [restaurants, setRestaurants]= useState([])
     const [radius,setRadius]= useState(10000)
+    
    
     useEffect(()=>{
         
@@ -60,13 +61,50 @@ function RestaurantViewer(props){
             console.log(error);
           });
     }
-
-    const sortList= ()=>{
+    const sortListRatingDown= ()=>{
+      const newRest = [...restaurants]
+        newRest.sort(function(a, b){return a.rating - b.rating})
+      setRestaurants(newRest)
+  }
+  const sortListRatingUp= ()=>{
+    const newRest = [...restaurants]
+      newRest.sort(function(a, b){return b.rating - a.rating})
+    setRestaurants(newRest)
+}
+    const sortListPriceDown= ()=>{
         const newRest = [...restaurants]
-        newRest.sort(function(a, b){return a.price_level - b.price_level})
-        console.log(newRest)
+          newRest.sort(function(a, b){return a.price_level - b.price_level})
         setRestaurants(newRest)
     }
+    const sortListPriceUp =()=>{
+      const newRest = [...restaurants]
+      newRest.sort(function(a, b){return b.price_level - a.price_level})
+      setRestaurants(newRest)
+    }
+
+    const sortListNameUp =()=>{
+      const newRest = [...restaurants]
+      newRest.sort(function(a, b){
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB)return 1;
+        if (nameA > nameB) return -1;
+        return 0;
+      })
+      setRestaurants(newRest)
+    }
+    const sortListNameDown =()=>{
+      const newRest = [...restaurants]
+      newRest.sort(function(a, b){
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB)return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      })
+      setRestaurants(newRest)
+    }
+    
     
     return(
       <div>
@@ -77,6 +115,7 @@ function RestaurantViewer(props){
         variant="contained"
         color="default"
         className={classes.button}
+        onClick={sortListNameDown}
         startIcon={<FiArrowDown />}
       >
         Name
@@ -85,6 +124,7 @@ function RestaurantViewer(props){
         variant="contained"
         color="default"
         className={classes.button}
+        onClick={sortListNameUp}
         startIcon={<FiArrowUp />}
       >
         Name
@@ -94,6 +134,7 @@ function RestaurantViewer(props){
         variant="contained"
         color="default"
         className={classes.button}
+        onClick={sortListPriceUp}
         startIcon={<FiArrowUp />}
       >
         $$$$$
@@ -102,6 +143,7 @@ function RestaurantViewer(props){
         variant="contained"
         color="default"
         className={classes.button}
+        onClick={sortListPriceDown}
         startIcon={<FiArrowDown />}
       >
         $ &nbsp;&nbsp;
@@ -111,6 +153,7 @@ function RestaurantViewer(props){
         variant="contained"
         color="default"
         className={classes.button}
+        onClick={sortListRatingUp}
         startIcon={<FiArrowUp />}
       >
         Rating
@@ -119,11 +162,13 @@ function RestaurantViewer(props){
         variant="contained"
         color="default"
         className={classes.button}
+        onClick={sortListRatingDown}
         startIcon={<FiArrowDown />}
       >
         Rating
       </Button>
       </div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-simple">Type</InputLabel>
         <Select
@@ -143,6 +188,7 @@ function RestaurantViewer(props){
           <option value={"meal_takeaway"}>takeout</option>
         </Select>
       </FormControl>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-simple">Radius</InputLabel>
         <Select
