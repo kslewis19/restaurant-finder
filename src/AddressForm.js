@@ -26,6 +26,8 @@ function AddressForm(props){
         .then(response => {
           const formated= response.data.results[0].geometry.location.lat+","+ response.data.results[0].geometry.location.lng
           console.log(formated)
+          props.setLat(response.data.results[0].geometry.location.lat)
+          props.setLng(response.data.results[0].geometry.location.lng)
           props.setCoords(formated)
           props.setHasAdd(true)
         }, error => {

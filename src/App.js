@@ -4,10 +4,13 @@ import RestaurantViewer from './RestaurantViewer'
 import AddressForm from './AddressForm'
 import { useEffect, useState } from 'react';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { latLng } from 'leaflet';
 
 function App() {
   const [hasAdd, setHasAdd]= useState(false)
   const [coords, setCoords] = useState("0,0")
+  const [lat, setLat]= useState(0)
+  const [lng, setLng]= useState(0)
   
   
   return (
@@ -16,7 +19,7 @@ function App() {
     <FastfoodIcon style={{size: 20}}/>
     <h1 >Restaurant Finder</h1>
     </div>
-    {hasAdd? <RestaurantViewer coords={coords} />:<AddressForm setHasAdd= {setHasAdd} setCoords={setCoords} />}
+    {hasAdd? <RestaurantViewer coords={coords} lat={lat} lng={lng} />:<AddressForm setHasAdd= {setHasAdd} setCoords={setCoords} setLat={setLat} setLng={setLng}/>}
     </div>
   );
 }

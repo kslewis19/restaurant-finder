@@ -18,6 +18,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {Map,TileLayer, Marker, Popup } from 'react-leaflet'
+import 'leaflet/dist/leaflet.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const API_KEY= process.env.REACT_APP_API_KEY
 
 function RestaurantViewer(props){
+  
     const classes = useStyles();
     const [restaurants, setRestaurants]= useState([])
     const [radius,setRadius]= useState(8047)
@@ -109,6 +112,7 @@ function RestaurantViewer(props){
     
     
     return(
+      
       <div>
         <div style ={{display: "flex",flexDirection:"row"}}>
           <div className= "Sort Container">
@@ -226,7 +230,20 @@ function RestaurantViewer(props){
             </List>
             </div>
             <div style ={{display: "flex",flex:1, width: "50%"}}>
-                the map go here
+                <div style={{height: 300}}>
+            <Map style={{height: 600, width: 500}} center={[props.lat, props.lng]} zoom={13} scrollWheelZoom={false}>
+    <TileLayer
+    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+  <Marker position={[51.505, -0.09]}>
+    <Popup>
+      A pretty CSS3 popup. <br /> Easily customizable.
+    </Popup>
+  </Marker>
+</Map>
+
+              </div>
                 </div>
             
         </div>
