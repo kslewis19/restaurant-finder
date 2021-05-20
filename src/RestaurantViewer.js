@@ -35,25 +35,27 @@ const API_KEY= process.env.REACT_APP_API_KEY
 function RestaurantViewer(props){
     const classes = useStyles();
     const [restaurants, setRestaurants]= useState([])
-    const [radius,setRadius]= useState(10000)
+    const [radius,setRadius]= useState(8047)
+    const [type,setType]= useState("restaurant")
     
    
     useEffect(()=>{
         
         fetchPlaces()
-    }, [])
+    }, [type,radius])
 
     function fetchPlaces(){
         const url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?parameters");
           url.searchParams.append("key", API_KEY);
           url.searchParams.append("location", props.coords);
           url.searchParams.append("radius", radius );
-          url.searchParams.append("type", "restaurant" );
+          url.searchParams.append("type", type );
           url.searchParams.append("opennow", true );
 
           const axios = require('axios');
           axios.get(url)
           .then(response => {
+            console.log(type)
             console.log(response.data.results);
             
             setRestaurants(response.data.results)
@@ -173,8 +175,8 @@ function RestaurantViewer(props){
         <InputLabel htmlFor="age-native-simple">Type</InputLabel>
         <Select
           native
-          //value={state.age}
-          //onChange={handleChange}
+          value={type}
+          onChange={(e)=>{setType(e.target.value)}}
           defaultValue={"restaurant"}
           inputProps={{
             name: 'age',
@@ -193,8 +195,8 @@ function RestaurantViewer(props){
         <InputLabel htmlFor="age-native-simple">Radius</InputLabel>
         <Select
           native
-          //value={state.age}
-          //onChange={handleChange}
+          value={radius}
+          onChange={(e)=>{setRadius(e.target.value)}}
           defaultValue={8047}
           inputProps={{
             name: 'age',
