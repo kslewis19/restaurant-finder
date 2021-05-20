@@ -10,8 +10,15 @@ import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-
 import Typography from '@material-ui/core/Typography';
+import { FiArrowDown } from "react-icons/fi";
+import { FiArrowUp } from "react-icons/fi";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +53,7 @@ function RestaurantViewer(props){
           const axios = require('axios');
           axios.get(url)
           .then(response => {
-            //console.log(response.data.results);
+            console.log(response.data.results);
             
             setRestaurants(response.data.results)
           }, error => {
@@ -62,6 +69,101 @@ function RestaurantViewer(props){
     }
     
     return(
+      <div>
+        <div style ={{display: "flex",flexDirection:"row"}}>
+          <div className= "Sort Container">
+          Sort By: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<FiArrowDown />}
+      >
+        Name
+      </Button>
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<FiArrowUp />}
+      >
+        Name
+      </Button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<FiArrowUp />}
+      >
+        $$$$$
+      </Button>
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<FiArrowDown />}
+      >
+        $ &nbsp;&nbsp;
+      </Button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<FiArrowUp />}
+      >
+        Rating
+      </Button>
+      <Button
+        variant="contained"
+        color="default"
+        className={classes.button}
+        startIcon={<FiArrowDown />}
+      >
+        Rating
+      </Button>
+      </div>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-simple">Type</InputLabel>
+        <Select
+          native
+          //value={state.age}
+          //onChange={handleChange}
+          defaultValue={"restaurant"}
+          inputProps={{
+            name: 'age',
+            id: 'age-native-simple',
+          }}
+        >
+          
+          <option value={"restaurant"}>restaurant</option>
+          <option value={"bar"}>bar</option>
+          <option value={"cafe"}>cafe</option>
+          <option value={"meal_takeaway"}>takeout</option>
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-simple">Radius</InputLabel>
+        <Select
+          native
+          //value={state.age}
+          //onChange={handleChange}
+          defaultValue={8047}
+          inputProps={{
+            name: 'age',
+            id: 'age-native-simple',
+          }}
+        >
+          
+          <option value={1609}>1 mile</option>
+          <option value={3219}>2 miles</option>
+          <option value={8047}>5 miles</option>
+          <option value={16093}>10 miles</option>
+          <option value={24140}>15 miles</option>
+        </Select>
+      </FormControl>
+          </div>
         <div style ={{display: "flex",flexDirection:"row"}} >
              <div style ={{display: "flex",flex:1, width: "50%", justifyContent:"center"}}>
              <List className={classes.root}>
@@ -79,6 +181,7 @@ function RestaurantViewer(props){
                 the map go here
                 </div>
             
+        </div>
         </div>
     )
 }
