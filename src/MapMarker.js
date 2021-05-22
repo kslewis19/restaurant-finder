@@ -15,11 +15,19 @@ function MapMarker(props) {
         iconUrl:
           "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF"
       });
-  
-    return (
-        <Marker position={[props.lat, props.lng]} icon={blueIcon}>
+  if (!props.isRestaurant){
+    return(
+    <Marker position={[props.lat, props.lng]} icon={blueIcon}>
             <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                Your location
+    </Popup>
+        </Marker>
+    )
+  }
+    return (
+        <Marker position={[props.lat, props.lng]} icon={greenIcon}>
+            <Popup>
+               {props.name} <br /> {props.address}
     </Popup>
         </Marker>
     )

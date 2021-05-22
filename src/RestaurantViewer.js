@@ -117,7 +117,7 @@ function RestaurantViewer(props) {
     <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div className="Sort Container">
-          Sort By: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp; Sort By: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Button
             variant="contained"
             color="default"
@@ -232,13 +232,21 @@ function RestaurantViewer(props) {
         </div>
         <div style={{ display: "flex", flex: 1, width: "50%" }}>
           <div style={{ height: 300 }}>
-            <Map style={{ height: 600, width: 500 }} center={[props.lat, props.lng]} zoom={13} scrollWheelZoom={false}>
+            <Map style={{ height: 800, width: 800 }} center={[props.lat, props.lng]} zoom={13} scrollWheelZoom={false}>
               <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <MapMarker lat={props.lat} lng={props.lng}/>
+              <MapMarker lat={props.lat} lng={props.lng} isRestaurant={false} />
+
+              {restaurants.map((rest, key) => (
+
+                 <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true} />
+
+
+              ))}
               
+
             </Map>
 
           </div>
