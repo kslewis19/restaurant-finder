@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import RestaurantViewer from './RestaurantViewer'
 import AddressForm from './AddressForm'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
-import { latLng } from 'leaflet';
+
 
 function App() {
   const [hasAdd, setHasAdd]= useState(false)
@@ -14,7 +14,7 @@ function App() {
   
   
   return (
-    <div class="root" >
+    <div className ="root" >
       <div style={{display:"flex",flexDirection: "row",justifyContent:"center",alignItems:"center"}}>
     <FastfoodIcon style={{size: 20}}/>
     <h1 >Restaurant Finder</h1>

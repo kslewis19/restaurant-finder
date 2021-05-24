@@ -36,10 +36,7 @@ function RestaurantViewer(props) {
   const [type, setType] = useState("restaurant")
 
 
-  useEffect(() => {
-
-    fetchPlaces()
-  }, [type, radius])
+  useEffect(fetchPlaces, [type, radius, props.coords])
 
   function fetchPlaces() {
     const url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?parameters");
@@ -175,7 +172,6 @@ function RestaurantViewer(props) {
             native
             value={type}
             onChange={(e) => { setType(e.target.value) }}
-            defaultValue={"restaurant"}
             inputProps={{
               name: 'age',
               id: 'age-native-simple',
@@ -195,7 +191,6 @@ function RestaurantViewer(props) {
             native
             value={radius}
             onChange={(e) => { setRadius(e.target.value) }}
-            defaultValue={8047}
             inputProps={{
               name: 'age',
               id: 'age-native-simple',
@@ -234,7 +229,7 @@ function RestaurantViewer(props) {
 
               {restaurants.map((rest, key) => (
 
-                 <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true}lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} key={key}/>
+                 <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true} key={key}/>
 
 
               ))}
