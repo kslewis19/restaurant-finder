@@ -110,7 +110,7 @@ function RestaurantViewer(props) {
     })
     setRestaurants(newRest)
   }
-
+  
 
   return (
 
@@ -223,7 +223,7 @@ function RestaurantViewer(props) {
 
             {restaurants.map((rest, key) => (
 
-              <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key} />
+              <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key} place_id={rest.place_id} lat={rest.geometry.location.lat} lng={rest.geometry.location.lng}/>
 
 
             ))}

@@ -7,7 +7,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-
+import Button from '@material-ui/core/Button';
+import { FiArrowDown } from "react-icons/fi";
+import IconButton from '@material-ui/core/IconButton';
+import { FcUpRight } from "react-icons/fc";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,14 +22,32 @@ const useStyles = makeStyles((theme) => ({
       display: 'inline',
     },
   }));
+ 
 
 function RestaurantCard(props){
+  const formated= props.lat+","+ props.lng
+  const url = new URL("https://www.google.com/maps/search/?api=1");
+  url.searchParams.append("query_place_id", props.place_id);
+  url.searchParams.append("query", formated);
+ const openDirections=()=>{
+    const url = new URL("https://www.google.com/maps/search/?api=1");
+    url.searchParams.append("query_place_id", props.place_id);
+    url.searchParams.append("query", formated);
+    console.log(url.search)
+    window.open(url, '_blank');
+ }
     const classes = useStyles();
     return(
         <div>
         <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" variant="square" className={classes.square} src={props.image} />
+          <IconButton
+            color="primary"
+            onClick={openDirections}
+          >
+            <FcUpRight/>
+          </IconButton>
         </ListItemAvatar>
         <ListItemText
           primary= {props.name}
