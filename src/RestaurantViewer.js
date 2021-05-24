@@ -12,6 +12,7 @@ import Select from '@material-ui/core/Select';
 import { Map, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker'
+import { TextField } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,8 +37,21 @@ function RestaurantViewer(props) {
   const [type, setType] = useState("restaurant")
   const [center, setCenter]= useState ([props.lat, props.lng])
   const [zoom, setZoom] = useState(13)
+  const [keyword, setKeyword]= useState("")
 
-  useEffect(fetchPlaces, [type, radius, props.coords])
+  useEffect(fetchPlaces, // eslint-disable-next-line
+     [type, radius, props.coords])
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log("Keyword: ",keyword)
+      fetchPlaces()
+    }, 750)
+
+    return () => clearTimeout(delayDebounceFn)
+    // eslint-disable-next-line
+  }, [keyword])
+
 
   function fetchPlaces() {
     const url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?parameters");
@@ -46,6 +60,7 @@ function RestaurantViewer(props) {
     url.searchParams.append("radius", radius);
     url.searchParams.append("type", type);
     url.searchParams.append("opennow", true);
+    url.searchParams.append("keyword", keyword)
 
     const axios = require('axios');
     axios.get(url)
@@ -57,6 +72,7 @@ function RestaurantViewer(props) {
       }, error => {
         console.log(error);
       });
+      
   }
   const sortListRatingDown = () => {
     const newRest = [...restaurants]
@@ -205,6 +221,8 @@ function RestaurantViewer(props) {
             <option value={24140}>15 miles</option>
           </Select>
         </FormControl>
+            <TextField name='value' value={keyword} onChange={(event)=>{setKeyword(event.target.value)}} placeholder={'search by keywords'} >
+            </TextField>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }} >
         <div style={{ display: "flex", flex: 1, width: "50%", justifyContent: "center" }}>

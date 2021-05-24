@@ -44,7 +44,6 @@ function AddressForm(props){
             <TextField name='value' value={address} onChange={(event)=>{setAddress(event.target.value)}} placeholder={'enter address'} >
             </TextField>
             <Button type="submit" variant="contained">Search</Button>
-          
         </form>
         </div>
     )

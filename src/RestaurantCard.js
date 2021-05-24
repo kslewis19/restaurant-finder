@@ -41,13 +41,14 @@ function RestaurantCard(props) {
           <Avatar alt="Remy Sharp" variant="square" className={classes.square} src={props.image} />
         </ListItemAvatar>
         <ListItemText
+        component={'span'}
           primary={props.name}
           secondary={
-            <React.Fragment>
-              <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
-                <div style={{ flex: 1 }}>
+            <React.Fragment >
+              <span style={{ display: "flex", flex: 1, flexDirection: "row" }}>
+                <span style={{ flex: 1 }}>
                   <Typography
-                    component="span"
+                    component={'span'}
                     variant="body2"
                     className={classes.inline}
                     color="textPrimary"
@@ -55,8 +56,8 @@ function RestaurantCard(props) {
                     Rating: {props.rating}/5 &nbsp;&nbsp;&nbsp;  Price: {props.price == null ? "N/A" : props.price}
 
                   </Typography>
-                </div>
-                <div style={{ flex: 1 }}>
+                </span>
+                <span style={{ flex: 1 }}>
                   <IconButton
                     color="primary"
                     onClick={openDirections}
@@ -73,8 +74,8 @@ function RestaurantCard(props) {
                   >
                     <MdCenterFocusStrong />
                   </IconButton>
-                </div>
-              </div>
+                </span>
+              </span>
 
               {props.address}
             </React.Fragment>
