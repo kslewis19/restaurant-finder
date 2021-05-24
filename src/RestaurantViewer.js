@@ -1,24 +1,15 @@
 import Button from '@material-ui/core/Button';
-import { TextField, FormLabel } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import RestaurantCard from './RestaurantCard'
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
 import { FiArrowDown } from "react-icons/fi";
 import { FiArrowUp } from "react-icons/fi";
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import { Map, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import MapMarker from './MapMarker'
 
@@ -243,7 +234,7 @@ function RestaurantViewer(props) {
 
               {restaurants.map((rest, key) => (
 
-                 <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true} />
+                 <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true}lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} key={key}/>
 
 
               ))}

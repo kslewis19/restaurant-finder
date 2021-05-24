@@ -1,6 +1,6 @@
 import Button from '@material-ui/core/Button';
-import { TextField, FormLabel } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { TextField } from '@material-ui/core';
+import { useState } from 'react';
 import './App.css';
 
 const API_KEY= process.env.REACT_APP_API_KEY
