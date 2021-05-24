@@ -8,67 +8,82 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import { FcUpRight } from "react-icons/fc";
-
+import { MdCenterFocusStrong } from "react-icons/md";
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      maxWidth: '36ch',
-      backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-      display: 'inline',
-    },
-  }));
- 
+  root: {
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
+}));
 
-function RestaurantCard(props){
-  const formated= props.lat+","+ props.lng
+
+function RestaurantCard(props) {
+  const formated = props.lat + "," + props.lng
   const url = new URL("https://www.google.com/maps/search/?api=1");
   url.searchParams.append("query_place_id", props.place_id);
   url.searchParams.append("query", formated);
- const openDirections=()=>{
+  const openDirections = () => {
     const url = new URL("https://www.google.com/maps/search/?api=1");
     url.searchParams.append("query_place_id", props.place_id);
     url.searchParams.append("query", formated);
     console.log(url.search)
     window.open(url, '_blank');
- }
-    const classes = useStyles();
-    return(
-        <div>
-        <ListItem alignItems="flex-start">
+  }
+  const classes = useStyles();
+  return (
+    <div>
+      <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" variant="square" className={classes.square} src={props.image} />
         </ListItemAvatar>
         <ListItemText
-          primary= {props.name}
+          primary={props.name}
           secondary={
             <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Rating: {props.rating}/5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Price: {props.price==null?"N/A": props.price} 
-                
-                <IconButton
-            color="primary"
-            onClick={openDirections}
-          >
-            <FcUpRight/>
-            
-          </IconButton>
-              </Typography>
-              <br/>
+              <div style={{ display: "flex", flex: 1, flexDirection: "row" }}>
+                <div style={{ flex: 1 }}>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className={classes.inline}
+                    color="textPrimary"
+                  >
+                    Rating: {props.rating}/5 &nbsp;&nbsp;&nbsp;  Price: {props.price == null ? "N/A" : props.price}
+
+                  </Typography>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <IconButton
+                    color="primary"
+                    onClick={openDirections}
+                  >
+                    <FcUpRight />
+
+                  </IconButton>
+                  <IconButton
+                    color="primary"
+                    onClick={() => {
+                      props.setCenter([props.lat, props.lng])
+                      props.setZoom(16)
+                    }}
+                  >
+                    <MdCenterFocusStrong />
+                  </IconButton>
+                </div>
+              </div>
+
               {props.address}
             </React.Fragment>
           }
         />
       </ListItem>
-      <Divider/>
-        </div>
-    )
+      <Divider />
+    </div>
+  )
 }
 
 export default RestaurantCard

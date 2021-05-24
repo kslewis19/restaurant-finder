@@ -34,7 +34,8 @@ function RestaurantViewer(props) {
   const [restaurants, setRestaurants] = useState([])
   const [radius, setRadius] = useState(8047)
   const [type, setType] = useState("restaurant")
-
+  const [center, setCenter]= useState ([props.lat, props.lng])
+  const [zoom, setZoom] = useState(13)
 
   useEffect(fetchPlaces, [type, radius, props.coords])
 
@@ -211,7 +212,7 @@ function RestaurantViewer(props) {
 
             {restaurants.map((rest, key) => (
 
-              <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key} place_id={rest.place_id} lat={rest.geometry.location.lat} lng={rest.geometry.location.lng}/>
+              <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key} place_id={rest.place_id} lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} setCenter={setCenter} setZoom={setZoom}/>
 
 
             ))}
@@ -220,7 +221,7 @@ function RestaurantViewer(props) {
         </div>
         <div style={{ display: "flex", flex: 1, width: "50%" }}>
           <div style={{ height: 300 }}>
-            <Map style={{ height: 800, width: 800 }} center={[props.lat, props.lng]} zoom={13} scrollWheelZoom={false}>
+            <Map style={{ height: 800, width: 800 }} center={center} zoom={zoom} scrollWheelZoom={false}>
               <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
