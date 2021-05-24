@@ -41,7 +41,7 @@ function RestaurantCard(props) {
           <Avatar alt="Remy Sharp" variant="square" className={classes.square} src={props.image} />
         </ListItemAvatar>
         <ListItemText
-        component={'span'}
+          component={'span'}
           primary={props.name}
           secondary={
             <React.Fragment >

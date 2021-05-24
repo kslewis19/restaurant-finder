@@ -35,16 +35,16 @@ function RestaurantViewer(props) {
   const [restaurants, setRestaurants] = useState([])
   const [radius, setRadius] = useState(8047)
   const [type, setType] = useState("restaurant")
-  const [center, setCenter]= useState ([props.lat, props.lng])
+  const [center, setCenter] = useState([props.lat, props.lng])
   const [zoom, setZoom] = useState(13)
-  const [keyword, setKeyword]= useState("")
+  const [keyword, setKeyword] = useState("")
 
   useEffect(fetchPlaces, // eslint-disable-next-line
-     [type, radius, props.coords])
+    [type, radius, props.coords])
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log("Keyword: ",keyword)
+      console.log("Keyword: ", keyword)
       fetchPlaces()
     }, 750)
 
@@ -72,7 +72,7 @@ function RestaurantViewer(props) {
       }, error => {
         console.log(error);
       });
-      
+
   }
   const sortListRatingDown = () => {
     const newRest = [...restaurants]
@@ -117,14 +117,14 @@ function RestaurantViewer(props) {
     })
     setRestaurants(newRest)
   }
-  
+
 
   return (
 
     <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div className="Sort Container">
-        &nbsp;&nbsp;&nbsp; Sort By: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp; Sort By: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Button
             variant="contained"
             color="default"
@@ -221,8 +221,8 @@ function RestaurantViewer(props) {
             <option value={24140}>15 miles</option>
           </Select>
         </FormControl>
-            <TextField name='value' value={keyword} onChange={(event)=>{setKeyword(event.target.value)}} placeholder={'search by keywords'} >
-            </TextField>
+        <TextField name='value' value={keyword} onChange={(event) => { setKeyword(event.target.value) }} placeholder={'search by keywords'} >
+        </TextField>
       </div>
       <div style={{ display: "flex", flexDirection: "row" }} >
         <div style={{ display: "flex", flex: 1, width: "50%", justifyContent: "center" }}>
@@ -230,7 +230,7 @@ function RestaurantViewer(props) {
 
             {restaurants.map((rest, key) => (
 
-              <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key} place_id={rest.place_id} lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} setCenter={setCenter} setZoom={setZoom}/>
+              <RestaurantCard name={rest.name} address={rest.vicinity} rating={rest.rating} price={rest.price_level} image={rest.icon} key={key} place_id={rest.place_id} lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} setCenter={setCenter} setZoom={setZoom} />
 
 
             ))}
@@ -248,11 +248,11 @@ function RestaurantViewer(props) {
 
               {restaurants.map((rest, key) => (
 
-                 <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true} key={key}/>
+                <MapMarker lat={rest.geometry.location.lat} lng={rest.geometry.location.lng} name={rest.name} address={rest.vicinity} isRestaurant={true} key={key} />
 
 
               ))}
-              
+
 
             </Map>
 
