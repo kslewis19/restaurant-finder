@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     maxWidth: '40ch',
     backgroundColor: theme.palette.background.paper,
+    overflow: 'auto',
+    maxHeight: 800,
   },
   inline: {
     display: 'inline',

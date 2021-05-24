@@ -42,12 +42,6 @@ function RestaurantCard(props){
         <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" variant="square" className={classes.square} src={props.image} />
-          <IconButton
-            color="primary"
-            onClick={openDirections}
-          >
-            <FcUpRight/>
-          </IconButton>
         </ListItemAvatar>
         <ListItemText
           primary= {props.name}
@@ -59,7 +53,15 @@ function RestaurantCard(props){
                 className={classes.inline}
                 color="textPrimary"
               >
-                {props.rating}/5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Price: {props.price==null?"unknown": props.price} 
+                Rating: {props.rating}/5  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Price: {props.price==null?"N/A": props.price} 
+                
+                <IconButton
+            color="primary"
+            onClick={openDirections}
+          >
+            <FcUpRight/>
+            
+          </IconButton>
               </Typography>
               <br/>
               {props.address}
